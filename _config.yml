@@ -18,7 +18,7 @@ exclude: ["node_modules", "gulpfile.js", "package.json", "Gemfile", "README.md"]
 baseurl:
 
 # the base hostname & protocol for your site
-url: "hackerarya.github.io"
+url: "http://localhost:3000"
 
 ####################################
 ######   Optional Features    ######

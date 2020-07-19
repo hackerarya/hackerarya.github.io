@@ -25,7 +25,7 @@
   <!-- Parallax Header Image -->
   <div class="parallax-wrapper">
     <div class="cover" data-scrollax="properties: { 'translateY': '48%' }">
-      <img src="/images/fromIITB.jpg" alt="DevCom code import" />
+      <img src="/images/code.png" alt="DevCom code import" />
     </div>
   </div>
 
@@ -61,8 +61,6 @@
         </nav>
 
       </div>
-
-
     </div>
 
     <!-- Site Header Banner -->
@@ -74,19 +72,11 @@
           <div>
             <img src="/images/logos/devcom.png" alt="DevCom Logo" />
           </div><br>
-          <hr class="medium"><br><!-- 
-          <h1 class="thin" style="text-transform: capitalize;">DevCom IITB</h1> -->
+          <hr class="medium">
         </div>
 
 
-        <!-- Header Buttons -->
-        <!-- <div class="row buttons-header"> -->
-          <!-- <div class="col-lg-4 col-lg-push-4 col-md-4 col-md-push-4 col-sm-8 col-sm-push-2 col-xs-10 col-xs-push-1"><a href="https://cybercodebear.github.io/blog.html" class="button-cta button-focus">Blog</a></div> -->
-          <!-- <div class="col-lg-3 col-lg-push-3 col-md-4 col-md-push-2 col-sm-8 col-sm-push-2 col-xs-10 col-xs-push-1"><a href="" class="button-cta"></a></div> -->
-        <!-- </div> -->
-
       </div>
-
     </div>
 
     <!-- Arrow Down -->
@@ -396,7 +386,7 @@
 <section class="site-section parallax-features-section parallax" id="parallax-features" data-scrollax-parent="true">
 
   <!-- Parallax Image -->
-  <div class="cover" data-scrollax="properties: { 'translateY': '48%' }">
+  <div class="cover">
     <img src="/images/new5.jpeg" alt="Parallax Features" />
   </div>
 
@@ -845,28 +835,43 @@
 </section>
 
 <script>
+
+  function disableScroll() { 
+    document.body.classList.add("stop-scrolling");
+  } 
+  
+  function enableScroll() { 
+    document.body.classList.remove("stop-scrolling");
+  }
+
   function instiapp() {
     document.getElementById("instiapp-popup").style.display = "block";
+    disableScroll();
   }
 
   function instiappclose() {
     document.getElementById("instiapp-popup").style.display = "none";
+    enableScroll();
   }
 
   function cerium() {
     document.getElementById("cerium-popup").style.display = "block";
+    disableScroll();
   }
 
   function ceriumclose() {
     document.getElementById("cerium-popup").style.display = "none";
+    enableScroll();
   }
 
   function noticeboard() {
     document.getElementById("noticeboard-popup").style.display = "block";
+    disableScroll();
   }
 
   function noticeboardclose() {
     document.getElementById("noticeboard-popup").style.display = "none";
+    enableScroll();
   }
 
 </script>

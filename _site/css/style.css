@@ -279,26 +279,29 @@ table {
 }
 
 .parallax .cover img {
-  position: absolute;
+  position: fixed;
   display: block;
   width: auto;
-  min-width: 100%;
+  /*min-width: 100%;*/
   min-height: 120%;
-  max-width: inherit;
+  max-width: 100%;
   max-height: 140%;
-  top: 50%;
-  left: 50%;
+  top: -10%;
+  left: 0;
+  object-fit: cover;
+  background-position: center;
   -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+          transform: scale(1.6);
 }
 
 .parallax .cover .content {
-  position: absolute;
+  /*position: absolute;*/
   display: block;
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
-  height: 100%;
+  height: 50%;
   z-index: 2;
 }
 
@@ -3061,7 +3064,7 @@ header.site-header .parallax-wrapper {
   position: absolute;
   width: 100%;
   height: 100vh;
-  max-height: 1080px;
+  max-height: 100%;
   top: 0;
   left: 0;
 }
@@ -3611,20 +3614,31 @@ header.site-header .arrow-down-section .arrow-down i:before {
     opacity: 0.8;
   }
 
+  header.site-header .header-banner .heading-content .heading-title div{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+
   .parallax .cover img {
-    position: absolute;
+    position: fixed;
     display: block;
-    width: auto;
-    min-width: 10%;
+    width: 100%;
+    /*min-width: 10%;*/
     min-height: 120%;
-    max-width: inherit;
-    max-height: 140%;
-    top: 50%;
-    left: 100%;
+    /*max-width: inherit;*/
+    max-height: 100%;
+    /*top: -25%;*/
+    /*left: -160%;*/
+    object-fit: cover;
+    object-position: 45% 50%;
     -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+            transform: scale(1);
   }
+  
+  
+
 
 }
 
@@ -4165,6 +4179,15 @@ section.parallax-features-section .section-features .phone img {
  .
  .*/
 
+.stop-scrolling { 
+  height: 100%; 
+  overflow: hidden; 
+} 
+
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+}
+
 section.parallax-features-section #instiapp-popup {
   position: fixed;
   top: -50px;
@@ -4173,20 +4196,24 @@ section.parallax-features-section #instiapp-popup {
   padding: -100px 50px 50px 30px;
   border-radius: 50px;
 
-  background-color: #923cb5;
-  background-image: linear-gradient(147deg, #923cb5 0%, #000000 74%);
+  background-image: linear-gradient( 112.1deg,  rgba(32,38,57,1) 11.4%, rgba(63,76,119,1) 70.2% );
+
   z-index: 10; 
+  transform: scale(0.85);
+
 }
 
 section.parallax-features-section #instiapp-popup .popup img {
   border-radius: 40px;
-  width: 500px;
+  width: 300px;
+  margin: auto;
 }
 
 section.parallax-features-section #instiapp-popup .close-button {
   position: relative;
   top: 30px;
-  left: 30px;
+  left: 80%;
+  transform: scale(0.8);
 }
 
 section.parallax-features-section #cerium-popup {
@@ -4197,20 +4224,22 @@ section.parallax-features-section #cerium-popup {
   padding: -100px 50px 50px 30px;
   border-radius: 50px;
 
-  background-color: #923cb5;
-  background-image: linear-gradient(147deg, #923cb5 0%, #000000 74%);
-  z-index: 10; 
+  background-image: linear-gradient( 112.1deg,  rgba(32,38,57,1) 11.4%, rgba(63,76,119,1) 70.2% );
+  z-index: 10;
+  transform: scale(0.85);
 }
 
 section.parallax-features-section #cerium-popup .popup img {
   border-radius: 40px;
-  width: 500px;
+  width: 300px;
+  margin: auto;
 }
 
 section.parallax-features-section #cerium-popup .close-button {
   position: relative;
   top: 30px;
-  left: 30px;
+  left: 80%;
+  transform: scale(0.8);
 }
 
 section.parallax-features-section #noticeboard-popup {
@@ -4221,20 +4250,22 @@ section.parallax-features-section #noticeboard-popup {
   padding: -100px 50px 50px 30px;
   border-radius: 50px;
 
-  background-color: #923cb5;
-  background-image: linear-gradient(147deg, #923cb5 0%, #000000 74%);
-  z-index: 10; 
+  background-image: linear-gradient( 112.1deg,  rgba(32,38,57,1) 11.4%, rgba(63,76,119,1) 70.2% );
+  z-index: 10;
+  transform: scale(0.85);
 }
 
 section.parallax-features-section #noticeboard-popup .popup img {
   border-radius: 40px;
-  width: 500px;
+  width: 300px;
+  margin: auto;
 }
 
 section.parallax-features-section #noticeboard-popup .close-button {
   position: relative;
   top: 30px;
-  left: 30px;
+  left: 80%;
+  transform: scale(0.8);
 }
 
 /* Added codes end here 
@@ -4289,7 +4320,7 @@ section.parallax-features-section .section-features .feature .text-wrap h3 {
 }
 
 section.parallax-features-section .section-features .feature .text-wrap p {
-  color: #bdc3c7;
+  color: #d7dcdf;
   font-size: 0.875rem;
 }
 
@@ -4342,6 +4373,7 @@ section.parallax-features-section .section-features .feature:hover .icon-wrap .c
     margin-right: auto;
     float: center;
   }
+
 }
 
 
