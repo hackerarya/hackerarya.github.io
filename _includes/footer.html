@@ -1,40 +1,27 @@
-<!-- Site Footer -->
-<footer class="site-footer" id="footer">
-  <div class="container">
-
-    <div class="row">
-      <div class="col-md-6 col-md-push-3 footer-info text-center">
-
-        <div class="footer-logo">
-          <img src="{{ site.baseurl }}/images/logos/devcom.png" width="50%" alt="DevCom logo" style="border-radius: 5%;" />
-        </div>
-
-        <div class="footer-info-text">
-          <!-- <p>{{ site.footer-description }}</p> -->
-        </div>
-
-        <div class="social-icons">
-          <ul class="icons">
-            <li><a href="{{ site.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="{{ site.github }}" target="_blank"><i class="fa fa-github"></i></a></li>
-            <li><a href="{{ site.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-            <!--<li><a href="{{ site.reddit }}" target="_blank"><i class="fi flaticon-reddit"></i></a></li>-->
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="col-md-8 col-md-push-2 footer-copyright">
-        <div class="footer-text text-center">
-          <p>What are we good at?</p>
-          <p>Obviously Coding and Development!!</p>
-        <p><a href="#home">&copy; {{ site.footer-copyright-text }}</a></p>
-        </div>
-      </div>
-    </div>
-
-  </div>
+<!-- Footer -->
+<footer id="footer">
+  <ul class="icons">
+    {% for socloc in site.social %}
+    {% if socloc[1] %}
+    {% if socloc[0] == 'email' %}
+    <li><a target="_blank" href="{{ socloc[1] }}" class="icon fa-envelope-o"
+           ><span class="label">E-mail</span></a></li>
+    {% else %}
+    <li><a target="_blank" href="{{ socloc[1] }}" class="icon fa-{{ socloc[0] }}"
+           ><span class="label">{{ socloc[0] }}</span></a></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+  </ul>
+  <ul class="copyright">
+    <li>&copy; {% assign thisyear = site.time | date: "%Y" %}
+    {% if site.first_published %}
+      {% capture diff %}{{ site.first_published | minus:thisyear }}{% endcapture %}
+      {% if diff contains '-' %}{{ site.first_published }},{% endif %}
+    {% endif %}
+    {{ thisyear }}
+    {% if site.owner %}{{ site.owner }}{% else %}{{ site.title }}{% endif %}</li>
+    <li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
+    <li>Built with: <a href="http://jekyllrb.com" target="_blank">Jekyll</a></li>
+  </ul>
 </footer>
-
-<!-- Go To Top Button -->
-<a href="#home" class="go-to-top-button"><i class="pe-7s-angle-up"></i></a>
