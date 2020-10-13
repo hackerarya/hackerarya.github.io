@@ -1,206 +1,100 @@
+/*
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/
 
-/**
- *
- *  Main JavaScript
- *
- *  @package gleesik_scripts
- *
- **/
+(function($) {
 
- // IIFE - Immediately Invoked Function Expression
-(function($, window, document) {
+	skel
+		.breakpoints({
+			xlarge:	'(max-width: 1680px)',
+			large:	'(max-width: 1280px)',
+			medium:	'(max-width: 980px)',
+			small:	'(max-width: 736px)',
+			xsmall:	'(max-width: 480px)'
+		});
 
-  // The $ is now locally scoped
+	$(function() {
 
-  // Listen for the jQuery ready event on the document
-  $(function() {
+		var	$window = $(window),
+			$body = $('body'),
+			$wrapper = $('#page-wrapper'),
+			$banner = $('#banner'),
+			$header = $('#header');
 
-    // The DOM is ready!
+		// Disable animations/transitions until the page has loaded.
+			$body.addClass('is-loading');
 
-    // Global Variables
-    var $window = $(window);
+			$window.on('load', function() {
+				window.setTimeout(function() {
+					$body.removeClass('is-loading');
+				}, 100);
+			});
 
-    /**
-     *  Page Loader
-     **/
-    setTimeout(function() {
-      $('.page-loader').addClass('load-complete');
-    }, 1500);
+		// Mobile?
+			if (skel.vars.mobile)
+				$body.addClass('is-mobile');
+			else
+				skel
+					.on('-medium !medium', function() {
+						$body.removeClass('is-mobile');
+					})
+					.on('+medium', function() {
+						$body.addClass('is-mobile');
+					});
 
-    /**
-     *  Parallax with Scrollax.js - Initialization
-     **/
-    'use strict';
-    $.Scrollax();
+		// Fix: Placeholder polyfill.
+			$('form').placeholder();
 
-    /**
-     *  Main Menu Navigation
-     **/
-    var $body = $('body');
-    var $nav_menu = $('.navigation-bar');
-    var $nav_menu_link = $('#navMenu ul li a');
-    var $toggle_menu_button = $('.navTrigger');
+		// Prioritize "important" elements on medium.
+			skel.on('+medium -medium', function() {
+				$.prioritize(
+					'.important\\28 medium\\29',
+					skel.breakpoint('medium').active
+				);
+			});
 
-    // Navigation Menu Link
-    $nav_menu_link.on('click', function() {
+		// Scrolly.
+			$('.scrolly')
+				.scrolly({
+					speed: 1500,
+					offset: $header.outerHeight()
+				});
 
-      // Select Current Navigation Item
-      $nav_menu_link.parent().removeClass('current-menu-item');
-      $(this).parent().addClass('current-menu-item');
+		// Menu.
+			$('#menu')
+				.append('<a href="#menu" class="close"></a>')
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'right',
+					target: $body,
+					visibleClass: 'is-menu-visible'
+				});
 
-      // Close Mobile Menu
-      $nav_menu.removeClass('active');
-      $toggle_menu_button.removeClass('active');
-      $body.removeClass('no-scroll');
+		// Header.
+			if (skel.vars.IEVersion < 9)
+				$header.removeClass('alt');
 
-    });
+			if ($banner.length > 0
+			&&	$header.hasClass('alt')) {
 
-    // Toggle Mobile Menu
-    $toggle_menu_button.on('click', function() {
-      $nav_menu.toggleClass('active');
-      $body.toggleClass('no-scroll');
-      $(this).toggleClass('active');
-    });
+				$window.on('resize', function() { $window.trigger('scroll'); });
 
-    // Remove all classes on window resize
-    $window.on('resize', function() {
-      $nav_menu.removeClass('active');
-      $body.removeClass('no-scroll');
-      $toggle_menu_button.removeClass('active');
-    });
+				$banner.scrollex({
+					bottom:		$header.outerHeight() + 1,
+					terminate:	function() { $header.removeClass('alt'); },
+					enter:		function() { $header.addClass('alt'); },
+					leave:		function() { $header.removeClass('alt'); }
+				});
 
-    /**
-     *  Portfolio
-     **/
-    var $filter_menu_item = $('.filter-menu ul li');
-    var $portfolio_grid = $('.portfolio-grid');
-    var $portfolio_grid_item = $portfolio_grid.children(".item");
-    var $overlay = $portfolio_grid.children("#overlay");
-    var $img = '<img alt="Portfolio Overlay Image" />';
-    var $data_filters = null;
+			}
 
-    // Filter Menu
-    $filter_menu_item.on('click', function() {
+	});
 
-      // Filter Menu
-      $filter_menu_item.removeClass('current');
-      $(this).addClass('current');
-
-      // Collecting Data Filters
-      $data_filters = $(this).data('filter');
-
-      // Hide All Portfolio Items
-      if($data_filters == 'all') {
-        $portfolio_grid_item.addClass('visible');
-      }
-      else { // Show Portfolio Items from filter
-        $portfolio_grid_item.removeClass('visible');
-        $($data_filters).addClass('visible');
-      }
-
-    });
-
-    // Show Image - Lightbox
-    $portfolio_grid_item.find(".item-expand").on('click', function(e) {
-
-      // Prevent Default Link Event
-      e.preventDefault();
-
-      // Get Image Link
-      var $src = $(this).attr("href");
-
-      // Create Image on the DOM
-      $overlay.append($img);
-
-      // Show Overlay Image
-      $overlay.fadeIn(200).children("img").attr("src", $src);
-
-      // Lock Body Scroll
-      $body.toggleClass('no-scroll');
-
-    });
-
-    // Hide Overlay Lightbox
-    $overlay.on('click', function() {
-
-      // Hide Overlay Image
-      $(this).fadeOut(200);
-
-      // Remove Image from DOM
-      $overlay.children("img").remove();
-
-      // Unlock Body Scroll
-      $body.toggleClass('no-scroll');
-
-    });
-
-    /**
-     *  Scroll Event
-     **/
-    $window.scroll(function() {
-
-      // Scroll Variables
-      var $scrollTop = $window.scrollTop();
-      var $windowHeight = $window.height();
-
-      /**
-       *  Go to Top Button
-       **/
-      var $go_top = $('.go-to-top-button');
-
-      if ( $scrollTop > 600 ) {
-        $go_top.addClass('active');
-      } else {
-        $go_top.removeClass('active');
-      }
-
-      // Reveal Item on Scroll
-      function revealItem($container, $item) {
-        if($scrollTop > ($container.offset().top - $windowHeight/1.3 )) {
-
-          $item.each(function(i) {
-            setTimeout(function() {
-              $item.eq(i).addClass("is-showing");
-            }, 150 * (i+1) );
-          });
-
-        }
-      }
-
-      // Portfolio Reveal Images
-      revealItem($portfolio_grid, $portfolio_grid_item);
-
-    });
-
-    /**
-     *  Testimonials Carousel Setup
-     **/
-    $("#testimonials-carousel").owlCarousel({
-
-        navigation : true, // Show next & prev buttons
-        slideSpeed : 300,
-        paginationSpeed : 400,
-        singleItem: true
-
-    });
-
-    /**
-     *  Smooth Scrolling for Links
-     **/
-    $('a[href*="#"]:not([href="#"])').on('click', function() {
-      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-       var target = $(this.hash);
-       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-       if (target.length) {
-        $('html, body').animate({
-           scrollTop: target.offset().top
-        }, 1000);
-        return false;
-       }
-      }
-    });
-
-  });
-
-}(window.jQuery, window, document));
-// The global jQuery object is passed as a parameter
+})(jQuery);
